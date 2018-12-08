@@ -1,0 +1,598 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{notebook}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{breath-alcohol-tests-in-ames-iowa-usa}{%
+\subsection{1. Breath alcohol tests in Ames, Iowa,
+USA}\label{breath-alcohol-tests-in-ames-iowa-usa}}
+
+Ames, Iowa, USA is the home of Iowa State University, a land grant
+university with over 36,000 students. By comparison, the city of Ames,
+Iowa, itself only has about 65,000 residents. As with any other college
+town, Ames has had its fair share of alcohol-related incidents. (For
+example, Google `VEISHEA riots 2014'.) We will take a look at some
+breath alcohol test data from Ames that is published by the State of
+Iowa.
+
+The data file `breath\_alcohol\_ames.csv' contains 1,556 readings from
+breath alcohol tests administered by the Ames and Iowa State University
+Police Departments from January 2013 to December 2017. The columns in
+this data set are year, month, day, hour, location, gender, Res1, Res2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}207}]:} \PY{c+c1}{\PYZsh{} load the tidyverse suite of packages }
+          \PY{n}{library}\PY{p}{(}\PY{n}{tidyverse}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} read the data into your workspace}
+          \PY{n}{ba\PYZus{}data} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{datasets/breath\PYZus{}alcohol\PYZus{}ames.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} quickly inspect the data}
+          \PY{n}{head}\PY{p}{(}\PY{n}{ba\PYZus{}data}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} obtain counts for each year }
+          \PY{n}{ba\PYZus{}year} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{count}\PY{p}{(}\PY{n}{year}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}head(ba\PYZus{}year)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Parsed with column specification:
+cols(
+  year = col\_integer(),
+  month = col\_integer(),
+  day = col\_integer(),
+  hour = col\_integer(),
+  location = col\_character(),
+  gender = col\_character(),
+  Res1 = col\_double(),
+  Res2 = col\_double()
+)
+
+    \end{Verbatim}
+
+    \begin{tabular}{r|llllllll}
+ year & month & day & hour & location & gender & Res1 & Res2\\
+\hline
+	 2017    & 12      & 17      & 1       & Ames PD & M       & 0.046   & 0.046  \\
+	 2017    & 12      & 14      & 3       & ISU PD  & F       & 0.121   & 0.120  \\
+	 2017    & 12      & 10      & 5       & ISU PD  & F       & 0.068   & 0.067  \\
+	 2017    & 12      & 10      & 3       & ISU PD  & F       & 0.077   & 0.077  \\
+	 2017    & 12      &  9      & 2       & ISU PD  & M       & 0.085   & 0.084  \\
+	 2017    & 12      &  9      & 1       & Ames PD & M       & 0.160   & 0.161  \\
+\end{tabular}
+
+
+    
+    \hypertarget{what-is-the-busiest-police-department-in-ames}{%
+\subsection{2. What is the busiest police department in
+Ames?}\label{what-is-the-busiest-police-department-in-ames}}
+
+There are two police departments in the data set: the Iowa State
+University Police Department and the Ames Police Department. Which one
+administers more breathalyzer tests?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}209}]:} \PY{c+c1}{\PYZsh{} use count to tally up the totals for each department}
+          \PY{n}{pds} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{group\PYZus{}by}\PY{p}{(}\PY{n}{location}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} 
+                  \PY{n}{summarise}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n}{head}\PY{p}{(}\PY{n}{pds}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|ll}
+ location & n\\
+\hline
+	 Ames PD & 616    \\
+	 ISU PD  & 940    \\
+\end{tabular}
+
+
+    
+    \hypertarget{nothing-good-happens-after-2am}{%
+\subsection{3. Nothing Good Happens after
+2am}\label{nothing-good-happens-after-2am}}
+
+We all know that ``nothing good happens after 2am.'' Thus, there are
+inevitably some times of the day when breath alcohol tests, especially
+in a college town like Ames, are most and least common. Which hours of
+the day have the most and least breathalyzer tests?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}211}]:} \PY{c+c1}{\PYZsh{} count by hour and arrange by descending frequency}
+          \PY{n}{hourly} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{group\PYZus{}by}\PY{p}{(}\PY{n}{hour}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                      \PY{n}{summarise}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                      \PY{n}{arrange}\PY{p}{(}\PY{n}{desc}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}head(hourly)}
+          \PY{c+c1}{\PYZsh{} use a geom\PYZus{} to create the appropriate bar chart}
+          \PY{n}{ggplot}\PY{p}{(}\PY{n}{hourly}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{hour}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{identity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{breathalyzer-tests-by-month}{%
+\subsection{4. Breathalyzer tests by
+month}\label{breathalyzer-tests-by-month}}
+
+Now that we have discovered which time of day is most common for breath
+alcohol tests, we will determine which time of the year has the most
+breathalyzer tests. Which month will have the most recorded tests?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}213}]:} \PY{c+c1}{\PYZsh{} count by month and arrange by descending frequency}
+          \PY{n}{monthly} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{group\PYZus{}by}\PY{p}{(}\PY{n}{month}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                      \PY{n}{summarise}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                      \PY{n}{arrange}\PY{p}{(}\PY{n}{desc}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}head(monthly)}
+          \PY{c+c1}{\PYZsh{} make month a factor}
+          \PY{n}{monthly}\PY{err}{\PYZdl{}}\PY{n}{month} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{k}{as}\PY{o}{.}\PY{n}{factor}\PY{p}{(}\PY{n}{monthly}\PY{err}{\PYZdl{}}\PY{n}{month}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} use a geom\PYZus{} to create the appropriate bar chart}
+          \PY{n}{ggplot}\PY{p}{(}\PY{n}{monthly}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{month}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}bar}\PY{p}{(}\PY{n}{stat} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{identity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_7_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{college}{%
+\subsection{5. COLLEGE}\label{college}}
+
+When we think of (binge) drinking in college towns in America, we
+usually think of something like this image at the left. And so, one
+might suspect that breath alcohol tests are given to men more often than
+women and that men drink more than women.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}215}]:} \PY{c+c1}{\PYZsh{} count by gender }
+          \PY{n}{by\PYZus{}gender} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{group\PYZus{}by}\PY{p}{(}\PY{n}{gender}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                          \PY{n}{summarise}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{p}{(}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                          \PY{n}{arrange}\PY{p}{(}\PY{n}{desc}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} create a dataset with no NAs in gender }
+          \PY{n}{clean\PYZus{}gender} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n+nb}{filter}\PY{p}{(}\PY{n}{gender} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NA}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}head(clean\PYZus{}gender)}
+          \PY{c+c1}{\PYZsh{} create a mean test result variable and save as mean\PYZus{}bas}
+          \PY{n}{mean\PYZus{}bas} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{clean\PYZus{}gender} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{mutate}\PY{p}{(}\PY{n}{meanRes} \PY{o}{=} \PY{p}{(}\PY{n}{Res1} \PY{o}{+} \PY{n}{Res2}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{2}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}head(mean\PYZus{}bas)}
+          \PY{c+c1}{\PYZsh{} create side\PYZhy{}by\PYZhy{}side boxplots to compare the mean blood alcohol levels of men and women}
+          \PY{n}{ggplot}\PY{p}{(}\PY{n}{mean\PYZus{}bas}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{x}\PY{o}{=} \PY{n}{gender}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{meanRes}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{geom\PYZus{}boxplot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{above-the-legal-limit}{%
+\subsection{6. Above the legal limit}\label{above-the-legal-limit}}
+
+In the USA, it is illegal to drive with a blood alcohol concentration
+(BAC) above 0.08\%. This is the case for all 50 states. Assuming
+everyone tested in our data was driving (though we have no way of
+knowing this from the data), if either of the results (Res1, Res2) are
+above 0.08, the person would be charged with DUI (driving under the
+influence).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}217}]:} \PY{c+c1}{\PYZsh{} Filter the data}
+          \PY{n}{duis} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n+nb}{filter}\PY{p}{(}\PY{n}{Res1} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.08} \PY{o}{|} \PY{n}{Res2} \PY{o}{\PYZgt{}} \PY{l+m+mf}{0.08} \PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} proportion of tests that would have resulted in a DUI}
+          \PY{n}{p\PYZus{}dui} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{nrow}\PY{p}{(}\PY{n}{duis}\PY{p}{)} \PY{o}{/} \PY{n}{nrow}\PY{p}{(}\PY{n}{ba\PYZus{}data}\PY{p}{)}
+          \PY{n}{p\PYZus{}dui}
+\end{Verbatim}
+
+
+    0.744858611825193
+
+    
+    \hypertarget{breathalyzer-tests-is-there-a-pattern-over-time}{%
+\subsection{7. Breathalyzer tests: is there a pattern over
+time?}\label{breathalyzer-tests-is-there-a-pattern-over-time}}
+
+We previously saw that 2am is the most common time of day for
+breathalyzer tests to be administered, and August is the most common
+month of the year for breathalyzer tests. Now, we look at the weeks in
+the year over time. We briefly use the lubridate package for a bit of
+date-time manipulation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}219}]:} \PY{n}{library}\PY{p}{(}\PY{n}{lubridate}\PY{p}{)} 
+          
+          \PY{c+c1}{\PYZsh{} Create date variable using paste() and ymd()}
+          \PY{n}{ba\PYZus{}data} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{mutate}\PY{p}{(}\PY{n}{date} \PY{o}{=} \PY{n}{ymd}\PY{p}{(}\PY{n}{paste}\PY{p}{(}\PY{n}{year}\PY{p}{,} \PY{n}{month}\PY{p}{,} \PY{n}{day}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Create a week variable using week()}
+          \PY{n}{ba\PYZus{}data} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{mutate}\PY{p}{(}\PY{n}{week} \PY{o}{=} \PY{n}{week}\PY{p}{(}\PY{n}{date}\PY{p}{)}\PY{p}{)}
+          \PY{n}{head}\PY{p}{(}\PY{n}{ba\PYZus{}data}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{tabular}{r|llllllllll}
+ year & month & day & hour & location & gender & Res1 & Res2 & date & week\\
+\hline
+	 2017       & 12         & 17         & 1          & Ames PD    & M          & 0.046      & 0.046      & 2017-12-17 & 51        \\
+	 2017       & 12         & 14         & 3          & ISU PD     & F          & 0.121      & 0.120      & 2017-12-14 & 50        \\
+	 2017       & 12         & 10         & 5          & ISU PD     & F          & 0.068      & 0.067      & 2017-12-10 & 50        \\
+	 2017       & 12         & 10         & 3          & ISU PD     & F          & 0.077      & 0.077      & 2017-12-10 & 50        \\
+	 2017       & 12         &  9         & 2          & ISU PD     & M          & 0.085      & 0.084      & 2017-12-09 & 49        \\
+	 2017       & 12         &  9         & 1          & Ames PD    & M          & 0.160      & 0.161      & 2017-12-09 & 49        \\
+\end{tabular}
+
+
+    
+    \hypertarget{looking-at-timelines}{%
+\subsection{8. Looking at timelines}\label{looking-at-timelines}}
+
+How do the weeks differ over time? One of the most common data
+visualizations is the time series, a line tracking the changes in a
+variable over time. We will use the new week variable to look at test
+frequency over time. We end with a time series plot showing frequency of
+breathalyzer tests by week in year, with one line for each year.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}221}]:} \PY{c+c1}{\PYZsh{} create the weekly data set }
+          \PY{n}{weekly} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{ba\PYZus{}data} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{group\PYZus{}by}\PY{p}{(}\PY{n}{week}\PY{p}{,} \PY{n}{year}\PY{p}{)} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}}
+                          \PY{n}{summarise}\PY{p}{(}\PY{n}{n} \PY{o}{=} \PY{n}{n}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} uncomment and run the following line}
+          \PY{n}{weekly} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{weekly} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{ungroup}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} ungroup is necessary for the plot later}
+          \PY{c+c1}{\PYZsh{}head(weekly)}
+          \PY{c+c1}{\PYZsh{} make year a factor}
+          \PY{n}{weekly} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{weekly} \PY{o}{\PYZpc{}}\PY{o}{\PYZgt{}}\PY{o}{\PYZpc{}} \PY{n}{mutate}\PY{p}{(}\PY{n}{year} \PY{o}{=} \PY{k}{as}\PY{o}{.}\PY{n}{factor}\PY{p}{(}\PY{n}{year}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} create the time series plot with one line for each year}
+          \PY{n}{ggplot}\PY{p}{(}\PY{n}{weekly}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{week}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+            \PY{n}{geom\PYZus{}line}\PY{p}{(}\PY{p}{)} \PY{o}{+} 
+            \PY{n}{geom\PYZus{}point}\PY{p}{(}\PY{n}{aes}\PY{p}{(}\PY{n}{color} \PY{o}{=} \PY{n}{year}\PY{p}{)}\PY{p}{)} \PY{o}{+}  \PY{c+c1}{\PYZsh{} included to make the plot more readable }
+            \PY{n}{scale\PYZus{}x\PYZus{}continuous}\PY{p}{(}\PY{n}{breaks} \PY{o}{=} \PY{n}{seq}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}  \PY{c+c1}{\PYZsh{} to make the x\PYZhy{}axis more readable }
+\end{Verbatim}
+
+
+    
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{the-end-of-veishea}{%
+\subsection{9. The end of VEISHEA}\label{the-end-of-veishea}}
+
+From Wikipedia: ``VEISHEA was an annual week-long celebration held each
+spring on the campus of Iowa State University in Ames, Iowa. The
+celebration featured an annual parade and many open-house demonstrations
+of the university facilities and departments. Campus organizations
+exhibited products, technologies, and held fundraisers for various
+charity groups. In addition, VEISHEA brought speakers, lecturers, and
+entertainers to Iowa State. {[}\ldots{}{]} VEISHEA was the largest
+student-run festival in the nation, bringing in tens of thousands of
+visitors to the campus each year.''
+
+This over 90-year tradition in Ames was terminated permanently after
+riots in 2014, where drunk celebrators flipped over multiple vehicles
+and tore light poles down. This was not the first incidence of violence
+and severe property damage in VEISHEA's history. Did former President
+Leath make the right decision?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}223}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Run this code to create the plot }
+          \PY{n}{ggplot}\PY{p}{(}\PY{p}{)} \PY{o}{+} 
+            \PY{n}{geom\PYZus{}point}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{weekly}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{week}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{n}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{n}{year}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+            \PY{n}{geom\PYZus{}line}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{weekly}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{week}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{n}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{n}{year}\PY{p}{)}\PY{p}{)} \PY{o}{+}  \PY{c+c1}{\PYZsh{} included to make the plot more readable }
+            \PY{n}{geom\PYZus{}segment}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{NULL}\PY{p}{,} \PY{n}{arrow} \PY{o}{=} \PY{n}{arrow}\PY{p}{(}\PY{n}{angle} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{n}{unit}\PY{p}{(}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inches}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,}
+                                                    \PY{n}{ends} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{last}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{type} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{closed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} 
+                         \PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{c}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{,} \PY{n}{xend} \PY{o}{=} \PY{n}{c}\PY{p}{(}\PY{l+m+mf}{15.5}\PY{p}{,}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{c}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{,} \PY{n}{yend} \PY{o}{=} \PY{n}{c}\PY{p}{(}\PY{l+m+mi}{21}\PY{p}{,} \PY{l+m+mf}{12.25}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{+} 
+            \PY{n}{geom\PYZus{}text}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{NULL}\PY{p}{,} \PY{n}{aes}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{23}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+m+mf}{20.5}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{VEISHEA Weeks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)} \PY{o}{+} 
+            \PY{n}{scale\PYZus{}x\PYZus{}continuous}\PY{p}{(}\PY{n}{breaks} \PY{o}{=} \PY{n}{seq}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{52}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} 
+          
+          \PY{c+c1}{\PYZsh{}\PYZsh{} Make a decision about VEISHEA. TRUE or FALSE?  }
+          \PY{n}{cancelling\PYZus{}VEISHEA\PYZus{}was\PYZus{}right} \PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}} \PY{n}{TRUE}
+\end{Verbatim}
+
+
+    
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
